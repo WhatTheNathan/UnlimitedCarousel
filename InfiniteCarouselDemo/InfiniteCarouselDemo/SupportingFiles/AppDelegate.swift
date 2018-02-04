@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  InfiniteCarousel
+//  InfiniteCarouselDemo
 //
 //  Created by Nathan on 04/02/2018.
 //  Copyright © 2018 Nathan. All rights reserved.
