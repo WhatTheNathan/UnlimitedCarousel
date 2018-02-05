@@ -77,7 +77,7 @@ Pod::Spec.new do |s|
   #
 
   s.source       = { :git => "https://github.com/WhatTheNathan/InfiniteCarousel.git", :tag => "#{s.version}" }
-
+  s.documentation_url = "https://github.com/WhatTheNathan/InfiniteCarousel"
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
