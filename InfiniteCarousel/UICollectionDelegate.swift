@@ -8,57 +8,58 @@
 
 import Foundation
 import UIKit
+import SDWebImage
 
 extension InfiniteCarousel: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        guard let dataSource = self.dataSource else { return 3 }
-        return dataSource.numberOfSections(in: self)
+        return numOfSection
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let dataSource = self.dataSource else { return }
-        return dataSource.numberOfFigures(for: self)
+        return numOfFigures
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Figure", for: indexPath) as! FigureCell
         cell.image.contentMode = .scaleToFill
-//        cell.image.sd_setImage(with: URL(string: itemArray[indexPath.row].picture_url), placeholderImage: #imageLiteral(resourceName: "default_herald"))
+        if let dataSource = self.dataSource {
+            cell.image.sd_setImage(with: dataSource.picLinkForFigure(at: ICIndexPath(column: indexPath.section,row: indexPath.row), in: self))
+        }
         return cell
     }
-    
-    
 }
 
 extension InfiniteCarousel: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        <#code#>
+        delegate?.infiniteCarousel(self, didSelectFigureAt: ICIndexPath.init(column: indexPath.section, row: indexPath.row))
     }
     
-    /// 手动拖动调用，无动画移动到中间section
+    /// Call when you manually drag, scroll to the middle section
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         guard let dataSource = self.dataSource else { return }
         collectionView.scrollToItem(at: IndexPath(item: pageControl.currentPage, section: dataSource.numberOfSections(in: self)/2), at: .left, animated: false)
     }
     
-    // 自动循环调用，无动画移动到中间section
+    /// Call when auto srcoll, scroll to the middle section
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        guard let dataSource = self.dataSource else { return }
         collectionView.scrollToItem(at: IndexPath(item: pageControl.currentPage, section: dataSource.numberOfSections(in: self)/2), at: .left, animated: false)
     }
     
-    // 计算当前页号
+    /// compute the current page
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let page = Int((scrollView.contentOffset.x + (CarouselFigure.bounds.width) * 0.5) / (CarouselFigure.bounds.width))
-        let currentPage = page % itemArray.count
+        guard let dataSource = self.dataSource else { return }
+        let page = Int((scrollView.contentOffset.x + (collectionView.bounds.width) * 0.5) / (collectionView.bounds.width))
+        let currentPage = page % dataSource.numberOfFigures(for: self)
         pageControl.currentPage = currentPage
     }
     
-    // 开始拖动时暂停自动循环
+    /// stop auto scroll when you manually drag
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         endAutoScroll()
     }
     
-    // 停止拖动时开启自动循环
+    /// start auto scroll when you stop manuallt dragging
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         startAutoScroll()
     }

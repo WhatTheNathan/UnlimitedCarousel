@@ -7,11 +7,7 @@
 //
 
 import UIKit
-
-//public enum CarouselDirection: String {
-//    case left
-//    case right
-//}
+import SnapKit
 
 public struct ICIndexPath {
     public var column = 0
@@ -24,35 +20,40 @@ public struct ICIndexPath {
 
 class InfiniteCarousel: UIView {
     
-    ///
-//    open var carouselDirection: CarouselDirection = .right
     open var intervalSecond = 4
     
-    ///
-    open var dataSource: InfiniteCarouselDataSource?
-    open var delegate: InfiniteCarouselDelegate?
+    open var dataSource: InfiniteCarouselDataSource? {
+        didSet {
+            numOfSection = (dataSource?.numberOfSections(in: self))!
+            numOfFigures = (dataSource?.numberOfFigures(for: self))!
+            customInit()
+        }
+    }
+    open var delegate: InfiniteCarouselDelegate? 
     
     /// UI stuff
-    private let flowLayout = UICollectionViewFlowLayout()
-    private var collectionView: UICollectionView!
-    private var pageControl = UIPageControl()
+    internal let flowLayout = UICollectionViewFlowLayout()
+    internal var collectionView: UICollectionView!
+    internal var pageControl = UIPageControl()
     private var timer: Timer?
+    
+    internal var numOfSection = 3
+    internal var numOfFigures = 1
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.addSubview(collectionView)
-        self.addSubview(pageControl)
-        layoutSubviews()
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
     
-    internal override func layoutSubviews() {
-        guard let dataSource = self.dataSource else { return }
-        guard let delegate = self.delegate else { return }
-        
+    fileprivate func customInit() {
+        setupSubviews()
+        collectionView.reloadData()
+    }
+    
+    internal func setupSubviews() {
         flowLayout.itemSize = CGSize(width: frame.width, height: frame.height)
         flowLayout.minimumLineSpacing = 0
         flowLayout.minimumInteritemSpacing = 0
@@ -65,12 +66,33 @@ class InfiniteCarousel: UIView {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(FigureCell.self, forCellWithReuseIdentifier: "Figure")
+        self.addSubview(collectionView)
+        /// initial position
+        collectionView.scrollToItem(at: IndexPath(item: 0, section: numOfSection/2), at: .left, animated: false)
         
-        pageControl.frame = CGRect(x: self.frame.width / 2, y: self.frame.height - 30, width: 20, height: 30)
-        pageControl.numberOfPages = dataSource.numberOfFigures(for: self)
+//        pageControl.frame = CGRect(x: self.frame.width / 2, y: self.frame.origin.y +  self.frame.height - 30, width: 20, height: 30)
+        pageControl.numberOfPages = numOfFigures
         pageControl.currentPageIndicatorTintColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         pageControl.tintColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
-        pageControl.hidesForSinglePage = delegate.isPageControlHideForSinglePage()
+        pageControl.hidesForSinglePage = true
+        pageControl.isEnabled = false
+        self.addSubview(pageControl)
+        
+        /// collectionView constraints
+        collectionView.snp.makeConstraints { (make) in
+            make.top.equalToSuperview().offset(0)
+            make.left.equalToSuperview().offset(0)
+            make.bottom.equalToSuperview().offset(0)
+            make.right.equalToSuperview().offset(0)
+        }
+        
+        /// pageControl constraints
+        pageControl.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(0)
+            make.height.equalTo(20)
+            make.width.equalTo(30)
+        }
     }
     
     func startAutoScroll() {
@@ -78,19 +100,16 @@ class InfiniteCarousel: UIView {
     }
     
     @objc func autoScroll(){
-        guard let dataSource = self.dataSource else { return }
-        guard let delegate = self.delegate else { return }
-        
-        // 获取现在的indexPath
+        // the current indexPath
         let currentIndexPath = collectionView.indexPathsForVisibleItems.last!
-        // 获取中间section的indexPath
-        let middleIndexPath = IndexPath(item: currentIndexPath.item, section: dataSource.numberOfSections(in: self) / 2)
-        // 滚动到中间的Section
+        // the middle section's indexPath
+        let middleIndexPath = IndexPath(item: currentIndexPath.item, section: numOfSection/2)
+        // scroll to the middle section
         collectionView.scrollToItem(at: middleIndexPath, at: .left, animated: false)
         
         var nextItem = middleIndexPath.item + 1
         var nextSection = middleIndexPath.section
-        if nextItem == dataSource.numberOfFigures(for: self) {
+        if nextItem == numOfFigures {
             nextItem = 0
             nextSection += 1
         }
@@ -101,5 +120,4 @@ class InfiniteCarousel: UIView {
         guard let endTimer = self.timer else{ return }
         endTimer.invalidate()
     }
-    
 }
