@@ -75,7 +75,7 @@ extension ViewController: InfiniteCarouselDataSource {
 }
 ```
 
-#### Delegate
+### Delegate
 
 ```swift
 extension ViewController: InfiniteCarouselDelegate {
@@ -91,7 +91,7 @@ extension ViewController: InfiniteCarouselDelegate {
 }
 ```
 
-### Customization
+## Customization
 
 ```swift
 let carousel = InfiniteCarousel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 160))
