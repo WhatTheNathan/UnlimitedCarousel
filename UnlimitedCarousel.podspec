@@ -16,8 +16,8 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "UnlimitedCarousel"
-  s.version      = "1.2.0"
-  s.summary      = "Highly customized Carousel Figure for iOS developed in Swift4"
+  s.version      = "1.2.1"
+  s.summary      = "Highly customized Carousel Figure for iOS developed in Swift"
 
   s.license      = "BSD"
 
@@ -113,5 +113,5 @@ Pod::Spec.new do |s|
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # s.dependency "JSONKit", "~> 1.4"
   s.dependency "SDWebImage", "~> 4.0"
-  s.dependency "SnapKit", "~> 4.0.0"
+  s.dependency "SnapKit", "~> 3.0"
 end

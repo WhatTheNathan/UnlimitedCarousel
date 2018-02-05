@@ -14,7 +14,7 @@ Highly customized Carousel Figure for iOS developed in Swift4
 
 * iOS 9.0+
 * Xcode 9
-* Swift 4.0
+* Swift 3.2
 * SnapKit && SDWebImage
 
 ## Installation
