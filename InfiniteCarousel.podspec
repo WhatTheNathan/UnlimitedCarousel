@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "InfiniteCarousel"
-  s.version      = "1.0.1"
+  s.version      = "1.1.0"
   s.summary      = "Highly customized Carousel Figure for iOS developed in Swift4"
 
   # This description is used to generate tags and improve search results.
