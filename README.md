@@ -1,4 +1,5 @@
-# InfiniteCarousel
+# UnlimitedCarousel
+
 Highly customized Carousel Figure for iOS developed in Swift4
 
 ## Overview
@@ -20,12 +21,12 @@ Highly customized Carousel Figure for iOS developed in Swift4
 
 ### CocoaPods
 
-`InfiniteCarousel` is avaliable through CocoaPods. 
+`UnlimitedCarousel` is avaliable through CocoaPods. 
 
-Add a pod entry for `InfiniteCarousel` to your Podfile:
+Add a pod entry for `UnlimitedCarousel` to your Podfile:
 
 ```
-pod 'InfiniteCarousel'
+pod 'UnlimitedCarousel'
 ```
 
 Install InfiniteCarousel into your project:
@@ -36,14 +37,14 @@ pod install
 
 ## Usage
 
-The only thing you need to do is import `InfiniteCarousel`, create an instance and add it to your `View` via code or StoryBoard, and conform to it's datasource and delegate.
+The only thing you need to do is import `UnlimitedCarousel`, create an instance and add it to your `View` via code or StoryBoard, and conform to it's datasource and delegate.
 
 ```swift
-import InfiniteCarousel
+import UnlimitedCarousel
 ```
 
 ```swift
-let carousel = InfiniteCarousel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 160))
+let carousel = UnlimitedCarousel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 160))
 carousel.delegate = self
 carousel.dataSource = self
 self.view.addSubview(carousel)
@@ -53,23 +54,23 @@ Just implement dataSource and delegate.
 
 ### dataSource
 
-**Note: number of sections in infiniteCarousel is the key to create the infinite effect, 3 or 5 is recommended**.
+**Note: number of sections in UnlimitedCarousel is the key to create the infinite effect, 3 or 5 is recommended**.
 
 ```swift
-extension ViewController: InfiniteCarouselDataSource {
-    func numberOfSections(in carousel: InfiniteCarousel) -> Int {
+extension ViewController: UnlimitedCarouselDataSource {
+    func numberOfSections(in carousel: UnlimitedCarousel) -> Int {
         return 3
     }
     
-    func numberOfFigures(for carousel: InfiniteCarousel) -> Int {
+    func numberOfFigures(for carousel: UnlimitedCarousel) -> Int {
         return itemArray.count
     }
     
-    func titleForFigure(at indexPath: ICIndexPath, in carousel: InfiniteCarousel) -> String {
+    func titleForFigure(at indexPath: ICIndexPath, in carousel: UnlimitedCarousel) -> String {
         return itemArray[indexPath.row].title
     }
     
-    func picLinkForFigure(at indexPath: ICIndexPath, in carousel: InfiniteCarousel) -> URL {
+    func picLinkForFigure(at indexPath: ICIndexPath, in carousel: UnlimitedCarousel) -> URL {
         return URL(string: itemArray[indexPath.row].picture_url)!
     }
 }
@@ -78,8 +79,8 @@ extension ViewController: InfiniteCarouselDataSource {
 ### Delegate
 
 ```swift
-extension ViewController: InfiniteCarouselDelegate {
-    func infiniteCarousel(_ carousel: InfiniteCarousel, didSelectFigureAt indexPath: ICIndexPath) {
+extension ViewController: UnlimitedCarouselDelegate {
+    func infiniteCarousel(_ carousel: UnlimitedCarousel, didSelectFigureAt indexPath: ICIndexPath) {
         let item = itemArray[indexPath.row]
         let url = item.link
         let webVC = WebViewController()
@@ -94,7 +95,7 @@ extension ViewController: InfiniteCarouselDelegate {
 ## Customization
 
 ```swift
-let carousel = InfiniteCarousel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 160))
+let carousel = UnlimitedCarousel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 160))
 carousel.pageControl.currentPageIndicatorTintColor = 
 carousel.pageControl.tintColor = 
 carousel.hidesForSinglePage = 
@@ -104,7 +105,7 @@ carousel.hidesForSinglePage =
 
 - [ ] customized srcoll top-down or left-right
 - [ ] customized enable PageControl
-- [ ] Not longer dependent on `SapKit` and `SDWebImage`
+- [ ] Not longer dependent on `SnapKit` and `SDWebImage`
 
 ## Change Log
 
@@ -118,4 +119,4 @@ via email: [@NathanLiu](http://nathanliuyolo@gmail.com)
 
 ## License
 
-`InfiniteCarousel` is released under the [BSD 2-Clause "Simplified" License](LICENSE). See LICENSE for details.
+`UnlimitedCarousel` is released under the [BSD 2-Clause "Simplified" License](LICENSE). See LICENSE for details.
