@@ -10,8 +10,9 @@ import UIKit
 
 class ViewController: UIViewController {
     
-//    @IBOutlet weak var carousel: InfiniteCarousel!
-        var carousel = InfiniteCarousel()
+    
+    @IBOutlet weak var carousel: InfiniteCarousel!
+//    var carousel = InfiniteCarousel()
     
     /// Model
     var itemArray: [FigureModel] = []
@@ -20,7 +21,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         initialModel()
         /// declare delegate and dataSource
-        carousel = InfiniteCarousel(frame: CGRect(x: 0, y: 200, width: UIScreen.main.bounds.width, height: 160))
+//        carousel = InfiniteCarousel(frame: CGRect(x: 0, y: 200, width: UIScreen.main.bounds.width, height: 160))
         self.view.addSubview(carousel)
         carousel.delegate = self
         carousel.dataSource = self
