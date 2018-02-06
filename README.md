@@ -1,6 +1,6 @@
 # UnlimitedCarousel
 
-Highly customized Carousel Figure for iOS developed in Swift4
+Highly customized Carousel Figure for iOS developed in Swift
 
 ## Overview
 
