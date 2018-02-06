@@ -1,5 +1,12 @@
 # UnlimitedCarousel
 
+[![Version](https://img.shields.io/cocoapods/v/UnlimitedCarousel.svg?style=flat)](http://cocoapods.org/pods/UnlimitedCarousel)
+[![License](https://img.shields.io/cocoapods/l/UnlimitedCarousel.svg?style=flat)](http://cocoapods.org/pods/UnlimitedCarousel)
+[![Language](https://img.shields.io/badge/language-Swift-orange.svg?style=flat)]()
+[![Platform](https://img.shields.io/cocoapods/p/UnlimitedCarousel.svg?style=flat)](http://cocoapods.org/pods/UnlimitedCarousel)
+[![](https://img.shields.io/github/stars/WhatTheNathan/UnlimitedCarousel.svg?style=social&label=Star)](#)
+
+
 Highly customized Carousel Figure for iOS developed in Swift
 
 ## Overview
