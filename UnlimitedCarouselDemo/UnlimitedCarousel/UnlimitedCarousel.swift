@@ -40,7 +40,7 @@ public class UnlimitedCarousel: UIView {
     internal var numOfSection = 3
     internal var numOfFigures = 1
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
     }
     

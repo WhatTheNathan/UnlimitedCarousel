@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "UnlimitedCarousel"
-  s.version      = "1.2.3"
+  s.version      = "1.3.0"
   s.summary      = "Highly customized Carousel Figure for iOS developed in Swift"
 
   s.license      = "BSD"

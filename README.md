@@ -116,7 +116,7 @@ carousel.hidesForSinglePage =
 
 ## Change Log
 
-* v1.2.3
+* v1.3.0
 
 ## Contacts
 
