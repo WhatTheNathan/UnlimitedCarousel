@@ -27,5 +27,5 @@ public protocol UnlimitedCarouselDataSource {
 
 public protocol UnlimitedCarouselDelegate {
     /// Tells the delegate that the figure at the specified index path was selected
-    func UnlimitedCarousel(_ carousel: UnlimitedCarousel, didSelectFigureAt indexPath: ICIndexPath)
+    func didSelect(in carousel: UnlimitedCarousel, at indexPath: ICIndexPath)
 }

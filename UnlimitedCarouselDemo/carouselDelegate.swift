@@ -9,7 +9,7 @@
 import Foundation
 
 extension ViewController: UnlimitedCarouselDelegate {
-    func UnlimitedCarousel(_ carousel: UnlimitedCarousel, didSelectFigureAt indexPath: ICIndexPath) {
+    func didSelect(in carousel: UnlimitedCarousel, at indexPath: ICIndexPath) {
         let item = itemArray[indexPath.row]
         let url = item.link
         if url != "" {

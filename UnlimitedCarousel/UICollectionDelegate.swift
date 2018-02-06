@@ -31,7 +31,7 @@ extension UnlimitedCarousel: UICollectionViewDataSource {
 
 extension UnlimitedCarousel: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.UnlimitedCarousel(self, didSelectFigureAt: ICIndexPath.init(column: indexPath.section, row: indexPath.row))
+        delegate?.didSelect(in: self, at: ICIndexPath.init(column: indexPath.section, row: indexPath.row))
     }
     
     /// Call when you manually drag, scroll to the middle section
