@@ -18,18 +18,18 @@ public struct ICIndexPath {
     }
 }
 
-class UnlimitedCarousel: UIView {
+public class UnlimitedCarousel: UIView {
     
     open var intervalSecond = 4
     
-    open var dataSource: UnlimitedCarouselDataSource? {
+    public var dataSource: UnlimitedCarouselDataSource? {
         didSet {
             numOfSection = (dataSource?.numberOfSections(in: self))!
             numOfFigures = (dataSource?.numberOfFigures(for: self))!
             customInit()
         }
     }
-    open var delegate: UnlimitedCarouselDelegate? 
+    public var delegate: UnlimitedCarouselDelegate?
     
     /// UI stuff
     internal let flowLayout = UICollectionViewFlowLayout()
@@ -44,13 +44,14 @@ class UnlimitedCarousel: UIView {
         super.init(frame: frame)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
     fileprivate func customInit() {
         setupSubviews()
         collectionView.reloadData()
+        startAutoScroll()
     }
     
     internal func setupSubviews() {
@@ -95,7 +96,7 @@ class UnlimitedCarousel: UIView {
         }
     }
     
-    func startAutoScroll() {
+    public func startAutoScroll() {
         timer = Timer.scheduledTimer(timeInterval: TimeInterval(intervalSecond), target: self, selector: #selector(autoScroll), userInfo: nil, repeats: true)
     }
     

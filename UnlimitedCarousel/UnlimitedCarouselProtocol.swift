@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol UnlimitedCarouselDataSource {
+public protocol UnlimitedCarouselDataSource {
     
     /// number of sections in UnlimitedCarousel,
     /// the key for create Unlimited effect,
@@ -25,7 +25,7 @@ protocol UnlimitedCarouselDataSource {
     func picLinkForFigure(at indexPath: ICIndexPath, in carousel: UnlimitedCarousel) -> URL
 }
 
-protocol UnlimitedCarouselDelegate {
+public protocol UnlimitedCarouselDelegate {
     /// Tells the delegate that the figure at the specified index path was selected
     func UnlimitedCarousel(_ carousel: UnlimitedCarousel, didSelectFigureAt indexPath: ICIndexPath)
 }
