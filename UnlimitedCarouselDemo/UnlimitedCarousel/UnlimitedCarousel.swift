@@ -51,6 +51,7 @@ public class UnlimitedCarousel: UIView {
     fileprivate func customInit() {
         setupSubviews()
         collectionView.reloadData()
+        if numOfFigures == 1 { collectionView.isScrollEnabled = false }
         startAutoScroll()
     }
     
@@ -97,7 +98,9 @@ public class UnlimitedCarousel: UIView {
     }
     
     public func startAutoScroll() {
-        timer = Timer.scheduledTimer(timeInterval: TimeInterval(intervalSecond), target: self, selector: #selector(autoScroll), userInfo: nil, repeats: true)
+        if (self.numOfFigures != 1) {
+            timer = Timer.scheduledTimer(timeInterval: TimeInterval(intervalSecond), target: self, selector: #selector(autoScroll), userInfo: nil, repeats: true)
+        }
     }
     
     @objc func autoScroll(){
