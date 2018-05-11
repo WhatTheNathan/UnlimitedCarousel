@@ -19,7 +19,7 @@ extension UnlimitedCarousel: UICollectionViewDataSource {
         return numOfFigures
     }
     
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView,   cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Figure", for: indexPath) as! FigureCell
         cell.image.contentMode = .scaleToFill
         if let dataSource = self.dataSource {

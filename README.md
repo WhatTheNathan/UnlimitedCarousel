@@ -11,12 +11,6 @@ Highly customized Carousel Figure for iOS developed in Swift
 
 ## Overview
 
-![overview_1](Resources/overview_1.gif)
-
-![overview_2](Resources/overview_2.gif)
-
-![overview_3](Resources/overview_3.gif)
-
 ## Requirements
 
 * iOS 9.0+
