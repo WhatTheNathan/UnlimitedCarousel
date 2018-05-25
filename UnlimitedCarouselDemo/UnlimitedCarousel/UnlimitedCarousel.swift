@@ -19,8 +19,11 @@ public struct ICIndexPath {
 }
 
 public class UnlimitedCarousel: UIView {
-    
-    open var intervalSecond = 4
+    /**
+      At each this interval, the picture scrolls once
+      Default is `4.0`
+     */
+    open var intervalSeconds : TimeInterval = 4.0
     
     public var dataSource: UnlimitedCarouselDataSource? {
         didSet {
@@ -31,17 +34,20 @@ public class UnlimitedCarousel: UIView {
             }
         }
     }
+    
     public var delegate: UnlimitedCarouselDelegate?
     
-    /// UI stuff
+    // MARK: UI stuff
     internal let flowLayout = UICollectionViewFlowLayout()
     internal var collectionView: UICollectionView!
     internal var pageControl = UIPageControl()
-    private var timer: Timer?
     
     internal var numOfSection = 3
     internal var numOfFigures = 1
     
+    private var timer: Timer?
+    
+    // Mark: initialization
     override public init(frame: CGRect) {
         super.init(frame: frame)
         customInit()
@@ -57,8 +63,7 @@ public class UnlimitedCarousel: UIView {
     }
     
     private func updateUI() {
-        
-        // deal with dataSource's change
+        /* deal with dataSource's change */
         if numOfFigures == 1 { collectionView.isScrollEnabled = false }
         pageControl.numberOfPages = numOfFigures
         collectionView.scrollToItem(at: IndexPath(item: 0, section: numOfSection/2), at: .left, animated: false)
@@ -81,10 +86,10 @@ public class UnlimitedCarousel: UIView {
         collectionView.dataSource = self
         collectionView.register(FigureCell.self, forCellWithReuseIdentifier: "Figure")
         self.addSubview(collectionView)
-        /// initial position
+        
+        /* initial position */
         collectionView.scrollToItem(at: IndexPath(item: 0, section: numOfSection/2), at: .left, animated: false)
         
-        //        pageControl.frame = CGRect(x: self.frame.width / 2, y: self.frame.origin.y +  self.frame.height - 30, width: 20, height: 30)
         pageControl.numberOfPages = numOfFigures
         pageControl.currentPageIndicatorTintColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         pageControl.tintColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
@@ -92,7 +97,7 @@ public class UnlimitedCarousel: UIView {
         pageControl.isEnabled = false
         self.addSubview(pageControl)
         
-        /// collectionView constraints
+        /* UI constraints */
         collectionView.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(0)
             make.left.equalToSuperview().offset(0)
@@ -100,7 +105,6 @@ public class UnlimitedCarousel: UIView {
             make.right.equalToSuperview().offset(0)
         }
         
-        /// pageControl constraints
         pageControl.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().offset(0)
@@ -112,17 +116,17 @@ public class UnlimitedCarousel: UIView {
     public func startAutoScroll() {
         endAutoScroll()
         if (self.numOfFigures != 1) {
-            timer = Timer.scheduledTimer(timeInterval: TimeInterval(intervalSecond), target: self, selector: #selector(autoScroll), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: intervalSeconds, target: self, selector: #selector(autoScroll), userInfo: nil, repeats: true)
             RunLoop.current.add(timer!, forMode: .commonModes)
         }
     }
     
     @objc func autoScroll(){
-        // the current indexPath
+        /* the current indexPath */
         let currentIndexPath = collectionView.indexPathsForVisibleItems.last!
-        // the middle section's indexPath
+        /* the middle section's indexPath */
         let middleIndexPath = IndexPath(item: currentIndexPath.item, section: numOfSection/2)
-        // scroll to the middle section
+        /* scroll to the middle section */
         collectionView.scrollToItem(at: middleIndexPath, at: .left, animated: false)
         
         var nextItem = middleIndexPath.item + 1

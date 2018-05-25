@@ -34,19 +34,19 @@ extension UnlimitedCarousel: UICollectionViewDelegate {
         delegate?.didSelect(in: self, at: ICIndexPath.init(column: indexPath.section, row: indexPath.row))
     }
     
-    /// Call when you manually drag, scroll to the middle section
+    /* Call when you manually drag, scroll to the middle section */
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         guard let dataSource = self.dataSource else { return }
         collectionView.scrollToItem(at: IndexPath(item: pageControl.currentPage, section: dataSource.numberOfSections(in: self)/2), at: .left, animated: false)
     }
     
-    /// Call when auto srcoll, scroll to the middle section
+    /* Call when auto srcoll, scroll to the middle section */
     public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         guard let dataSource = self.dataSource else { return }
         collectionView.scrollToItem(at: IndexPath(item: pageControl.currentPage, section: dataSource.numberOfSections(in: self)/2), at: .left, animated: false)
     }
     
-    /// compute the current page
+    /* compute the current page */
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard let dataSource = self.dataSource else { return }
         let page = Int((scrollView.contentOffset.x + (collectionView.bounds.width) * 0.5) / (collectionView.bounds.width))
@@ -54,12 +54,12 @@ extension UnlimitedCarousel: UICollectionViewDelegate {
         pageControl.currentPage = currentPage
     }
     
-    /// stop auto scroll when you manually drag
+    /* stop auto scroll when you manually drag */
     public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         endAutoScroll()
     }
     
-    /// start auto scroll when you stop manuallt dragging
+    /* start auto scroll when you stop manuallt dragging */
     public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         startAutoScroll()
     }
