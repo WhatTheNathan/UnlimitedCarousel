@@ -104,13 +104,12 @@ carousel.hidesForSinglePage =
 
 ## Todo
 
-- [ ] customized srcoll top-down or left-right
-- [ ] customized enable PageControl
+- [ ] customized PageControl
 - [ ] Not longer dependent on `SnapKit` and `SDWebImage`
 
 ## Change Log
 
-* v1.3.0
+* v1.4.0 stable version 1.0
 
 ## Contacts
 
