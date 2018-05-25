@@ -26,7 +26,9 @@ public class UnlimitedCarousel: UIView {
         didSet {
             numOfSection = (dataSource?.numberOfSections(in: self))!
             numOfFigures = (dataSource?.numberOfFigures(for: self))!
-            customInit()
+            DispatchQueue.once(token: "UnlimitedCarousel") {
+                updateUI()
+            }
         }
     }
     public var delegate: UnlimitedCarouselDelegate?
@@ -42,20 +44,30 @@ public class UnlimitedCarousel: UIView {
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
+        customInit()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        customInit()
     }
     
-    fileprivate func customInit() {
+    private func customInit() {
         setupSubviews()
-        collectionView.reloadData()
+    }
+    
+    private func updateUI() {
+        
+        // deal with dataSource's change
         if numOfFigures == 1 { collectionView.isScrollEnabled = false }
+        pageControl.numberOfPages = numOfFigures
+        collectionView.scrollToItem(at: IndexPath(item: 0, section: numOfSection/2), at: .left, animated: false)
+        
+        collectionView.reloadData()
         startAutoScroll()
     }
     
-    internal func setupSubviews() {
+    private func setupSubviews() {
         flowLayout.itemSize = CGSize(width: frame.width, height: frame.height)
         flowLayout.minimumLineSpacing = 0
         flowLayout.minimumInteritemSpacing = 0
@@ -72,7 +84,7 @@ public class UnlimitedCarousel: UIView {
         /// initial position
         collectionView.scrollToItem(at: IndexPath(item: 0, section: numOfSection/2), at: .left, animated: false)
         
-//        pageControl.frame = CGRect(x: self.frame.width / 2, y: self.frame.origin.y +  self.frame.height - 30, width: 20, height: 30)
+        //        pageControl.frame = CGRect(x: self.frame.width / 2, y: self.frame.origin.y +  self.frame.height - 30, width: 20, height: 30)
         pageControl.numberOfPages = numOfFigures
         pageControl.currentPageIndicatorTintColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         pageControl.tintColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
@@ -98,8 +110,10 @@ public class UnlimitedCarousel: UIView {
     }
     
     public func startAutoScroll() {
+        endAutoScroll()
         if (self.numOfFigures != 1) {
             timer = Timer.scheduledTimer(timeInterval: TimeInterval(intervalSecond), target: self, selector: #selector(autoScroll), userInfo: nil, repeats: true)
+            RunLoop.current.add(timer!, forMode: .commonModes)
         }
     }
     
@@ -121,7 +135,31 @@ public class UnlimitedCarousel: UIView {
     }
     
     func endAutoScroll(){
-        guard let endTimer = self.timer else{ return }
-        endTimer.invalidate()
+        timer?.invalidate()
+        timer = nil
+    }
+}
+
+public extension DispatchQueue {
+    
+    private static var _onceTracker = [String]()
+    
+    /**
+     Executes a block of code, associated with a unique token, only once.  The code is thread safe and will
+     only execute the code once even in the presence of multithreaded calls.
+     
+     - parameter token: A unique reverse DNS style name such as com.vectorform.<name> or a GUID
+     - parameter block: Block to execute once
+     */
+    public class func once(token: String, block:()->Void) {
+        objc_sync_enter(self)
+        defer { objc_sync_exit(self) }
+        
+        if _onceTracker.contains(token) {
+            return
+        }
+        
+        _onceTracker.append(token)
+        block()
     }
 }
