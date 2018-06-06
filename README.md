@@ -110,6 +110,7 @@ carousel.hidesForSinglePage =
 ## Change Log
 
 * v1.4.0 stable version 1.0
+* v1.4.2 add Optional TitleLabel
 
 ## Contacts
 

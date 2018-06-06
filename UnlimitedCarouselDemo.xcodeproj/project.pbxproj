@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5350165C20C7D2FA00A5F2CE /* FigureTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5350165B20C7D2FA00A5F2CE /* FigureTitleCell.swift */; };
 		536B53FD20275614008223E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536B53FC20275614008223E3 /* AppDelegate.swift */; };
 		536B53FF20275614008223E3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536B53FE20275614008223E3 /* ViewController.swift */; };
 		536B540220275614008223E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 536B540020275614008223E3 /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		20B7B6B0096AB9548398004E /* Pods_UnlimitedCarouselDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnlimitedCarouselDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5350165B20C7D2FA00A5F2CE /* FigureTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FigureTitleCell.swift; sourceTree = "<group>"; };
 		536B53F920275614008223E3 /* UnlimitedCarouselDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnlimitedCarouselDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		536B53FC20275614008223E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		536B53FE20275614008223E3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -109,9 +111,10 @@
 			isa = PBXGroup;
 			children = (
 				536B541220275A5A008223E3 /* UnlimitedCarousel.swift */,
-				536B541B2027632C008223E3 /* FigureCell.swift */,
-				536B541420275AE6008223E3 /* UnlimitedCarouselProtocol.swift */,
 				536B541820275B21008223E3 /* UICollectionDelegate.swift */,
+				536B541B2027632C008223E3 /* FigureCell.swift */,
+				5350165B20C7D2FA00A5F2CE /* FigureTitleCell.swift */,
+				536B541420275AE6008223E3 /* UnlimitedCarouselProtocol.swift */,
 			);
 			path = UnlimitedCarousel;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5350165C20C7D2FA00A5F2CE /* FigureTitleCell.swift in Sources */,
 				536B541320275A5A008223E3 /* UnlimitedCarousel.swift in Sources */,
 				536B5422202864CB008223E3 /* WebViewController.swift in Sources */,
 				536B53FF20275614008223E3 /* ViewController.swift in Sources */,

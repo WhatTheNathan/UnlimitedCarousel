@@ -25,6 +25,13 @@ public class UnlimitedCarousel: UIView {
      */
     open var intervalSeconds : TimeInterval = 4.0
     
+    /**
+      If titleLabel is hidden
+      Default is true
+     */
+    public var isTitleHidden : Bool = true
+    
+    /* DataSource */
     public var dataSource: UnlimitedCarouselDataSource? {
         didSet {
             numOfSection = (dataSource?.numberOfSections(in: self))!
@@ -35,7 +42,11 @@ public class UnlimitedCarousel: UIView {
         }
     }
     
+    /* Delegate */
     public var delegate: UnlimitedCarouselDelegate?
+    
+    /* TitleLabelConfig */
+    public var config: TitleLabelConfig?
     
     // MARK: UI stuff
     internal let flowLayout = UICollectionViewFlowLayout()
@@ -45,7 +56,7 @@ public class UnlimitedCarousel: UIView {
     internal var numOfSection = 3
     internal var numOfFigures = 1
     
-    private var timer: Timer?
+    fileprivate var timer: Timer?
     
     // Mark: initialization
     override public init(frame: CGRect) {
@@ -84,7 +95,9 @@ public class UnlimitedCarousel: UIView {
         collectionView.isPagingEnabled = true
         collectionView.delegate = self
         collectionView.dataSource = self
+        
         collectionView.register(FigureCell.self, forCellWithReuseIdentifier: "Figure")
+        collectionView.register(FigureTitleCell.self, forCellWithReuseIdentifier: "FigureTitle")
         self.addSubview(collectionView)
         
         /* initial position */
@@ -112,7 +125,10 @@ public class UnlimitedCarousel: UIView {
             make.width.equalTo(30)
         }
     }
-    
+}
+
+// MARK autoScroll Methods
+extension UnlimitedCarousel {
     public func startAutoScroll() {
         endAutoScroll()
         if (self.numOfFigures != 1) {
@@ -144,7 +160,8 @@ public class UnlimitedCarousel: UIView {
     }
 }
 
-public extension DispatchQueue {
+
+extension DispatchQueue {
     
     private static var _onceTracker = [String]()
     

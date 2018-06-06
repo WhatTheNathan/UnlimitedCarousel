@@ -20,12 +20,25 @@ extension UnlimitedCarousel: UICollectionViewDataSource {
     }
     
     public func collectionView(_ collectionView: UICollectionView,   cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Figure", for: indexPath) as! FigureCell
-        cell.image.contentMode = .scaleToFill
-        if let dataSource = self.dataSource {
-            cell.image.sd_setImage(with: dataSource.picLinkForFigure(at: ICIndexPath(column: indexPath.section,row: indexPath.row), in: self))
+        if isTitleHidden {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Figure", for: indexPath) as! FigureCell
+            cell.image.contentMode = .scaleToFill
+            if let dataSource = self.dataSource {
+                cell.image.sd_setImage(with: dataSource.picLinkForFigure(at: ICIndexPath(column: indexPath.section,row: indexPath.row), in: self))
+            }
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FigureTitle", for: indexPath) as! FigureTitleCell
+            cell.image.contentMode = .scaleToFill
+            if let dataSource = self.dataSource {
+                cell.image.sd_setImage(with: dataSource.picLinkForFigure(at: ICIndexPath(column: indexPath.section,row: indexPath.row), in: self))
+                cell.titleLabel.text = dataSource.titleForFigure(at: ICIndexPath(column: indexPath.section,row: indexPath.row), in: self)
+            }
+            if let config = self.config {
+                cell.config = config
+            }
+            return cell
         }
-        return cell
     }
 }
 

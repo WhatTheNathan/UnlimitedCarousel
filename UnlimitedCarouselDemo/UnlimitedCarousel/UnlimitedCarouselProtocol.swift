@@ -6,10 +6,10 @@
 //  Copyright © 2018 Nathan. All rights reserved.
 //
 
+import UIKit
 import Foundation
 
 public protocol UnlimitedCarouselDataSource {
-    
     /**
       number of sections in UnlimitedCarousel, the key for creating Unlimited effect,
       3 or 5 is recommended.
@@ -37,4 +37,21 @@ public protocol UnlimitedCarouselDelegate {
       Tells the delegate that the figure at the specified index path was selected
      */
     func didSelect(in carousel: UnlimitedCarousel, at indexPath: ICIndexPath)
+}
+
+public protocol TitleLabelConfig {
+    /**
+     font for titleLabel text
+     */
+    func fontForTitleLabel() -> UIFont?
+    
+    /**
+     color for titleLabel text
+     */
+    func colorForTitleLabel() -> UIColor?
+    
+    /**
+     background Color for titleLabel text
+     */
+    func backgroundColorForTitleLabel() -> UIColor?
 }

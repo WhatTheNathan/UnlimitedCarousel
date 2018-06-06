@@ -13,15 +13,20 @@ class FigureCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.contentView.addSubview(image)
-        layoutSubviews()
+        customInit()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        customInit()
     }
     
-    override func layoutSubviews() {
+    private func customInit() {
+        self.contentView.addSubview(image)
+        setUpSubview()
+    }
+    
+    private func setUpSubview() {
         image.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
     }
 }

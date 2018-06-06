@@ -24,6 +24,8 @@ class ViewController: UIViewController {
 //        carousel = UnlimitedCarousel(frame: CGRect(x: 0, y: 200, width: UIScreen.main.bounds.width, height: 160))
         self.view.addSubview(carousel)
         carousel.delegate = self
+        carousel.isTitleHidden = false
+        carousel.config = self
         carousel.dataSource = self
     }
     
@@ -39,12 +41,6 @@ class ViewController: UIViewController {
         link = "http://mp.weixin.qq.com/s/JXZ8frYklX5Xfmii6hECKQ"
         let figure_2 = FigureModel(title,link,picture_url)
         itemArray.append(figure_2)
-//        
-//        title = "支教"
-//        picture_url = "http://www.heraldstudio.com/herald/static/img/80f48cd3eff8c08d9fd7129627ae8a68.jpg"
-//        link = "http://mp.weixin.qq.com/s/GVYxv0tX-4ez0OIZDC5aiQ"
-//        let figure_3 = FigureModel(title,link,picture_url)
-//        itemArray.append(figure_3)
     }
 }
 

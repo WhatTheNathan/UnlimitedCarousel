@@ -6,6 +6,7 @@
 //  Copyright © 2018 Nathan. All rights reserved.
 //
 
+import UIKit
 import Foundation
 
 extension ViewController: UnlimitedCarouselDelegate {
@@ -21,7 +22,7 @@ extension ViewController: UnlimitedCarouselDelegate {
     }
 }
 
-extension ViewController: UnlimitedCarouselDataSource {
+extension ViewController: UnlimitedCarouselDataSource {    
     func numberOfSections(in carousel: UnlimitedCarousel) -> Int {
         return 3
     }
@@ -36,5 +37,19 @@ extension ViewController: UnlimitedCarouselDataSource {
     
     func picLinkForFigure(at indexPath: ICIndexPath, in carousel: UnlimitedCarousel) -> URL {
         return URL(string: itemArray[indexPath.row].picture_url)!
+    }
+}
+
+extension ViewController: TitleLabelConfig {
+    func fontForTitleLabel() -> UIFont? {
+        return UIFont.systemFont(ofSize: 14, weight: UIFontWeightSemibold)
+    }
+
+    func colorForTitleLabel() -> UIColor? {
+        return UIColor.blue
+    }
+
+    func backgroundColorForTitleLabel() -> UIColor? {
+        return UIColor.brown
     }
 }
