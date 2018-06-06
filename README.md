@@ -100,6 +100,24 @@ let carousel = UnlimitedCarousel(frame: CGRect(x: 0, y: 0, width: self.view.fram
 carousel.pageControl.currentPageIndicatorTintColor = 
 carousel.pageControl.tintColor = 
 carousel.hidesForSinglePage = 
+
+// titleLabel
+carousel.isTitleHidden = false // Default is true
+carousel.config = self
+
+extension ViewController: TitleLabelConfig {
+    func fontForTitleLabel() -> UIFont? {
+        return UIFont.systemFont(ofSize: 14, weight: UIFontWeightSemibold)
+    }
+
+    func colorForTitleLabel() -> UIColor? {
+        return UIColor.blue
+    }
+
+    func backgroundColorForTitleLabel() -> UIColor? {
+        return UIColor.brown
+    }
+}
 ```
 
 ## Todo
